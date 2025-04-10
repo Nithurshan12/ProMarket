@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProMarket - Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>ProMarket</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="welcome">
+            <h2>Welcome to ProMarket</h2>
+            <p>Your trusted online marketplace for buying and selling.</p>
+            <a href="products.html" class="btn">Browse Products</a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 ProMarket. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+2. products.html
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProMarket - Products</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>ProMarket</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="products">
+            <h2>Our Products</h2>
+            <div class="product-list">
+                <div class="product">
+                    <h3>Product 1</h3>
+                    <p>Description: A high-quality product.</p>
+                    <p>Price: $100</p>
+                </div>
+                <div class="product">
+                    <h3>Product 2</h3>
+                    <p>Description: Another great product.</p>
+                    <p>Price: $150</p>
+                </div>
+                <div class="product">
+                    <h3>Product 3</h3>
+                    <p>Description: The best product in the market.</p>
+                    <p>Price: $200</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 ProMarket. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+3. styles.css
+CSS
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 2rem;
+    text-align: center;
+}
+
+.welcome {
+    padding: 2rem;
+    background: #f4f4f4;
+    margin: 2rem 0;
+}
+
+.welcome .btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #333;
+    color: #fff;
+    text-decoration: none;
+    margin-top: 1rem;
+}
+
+.products {
+    padding: 1rem;
+    background: #f9f9f9;
+}
+
+.product-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.product {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin: 1rem;
+    width: 30%;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background: #333;
+    color: #fff;
+    margin-top: 2rem;
+}
