@@ -87,27 +87,39 @@ html>
     </header>
     <main>
         <section class="products">
-            <h2>Our Products</h2>
-            <div class="product-list">
-                <div class="product">
-                    <h3>Product 1</h3>
-                    <p>Description: Glasses</p>
-                    <p>Price: $100</p>
-                </div>
-                <div class="product">
-                    <h3>Product 2</h3>
-                    <p>Description: Markers.</p>
-                    <p>Price: $150</p>
-                </div>
-                <div class="product">
-                    <h3>Product 3</h3>
-                    <p>Description: Nike Shoes.</p>
-                    <p>Price: $200</p>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer>
+          <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trending Products</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Trending Products</h1>
+    <div class="products">
+        <div class="product" data-id="1" data-name="Glasses" data-price="10.00">
+            <h2>Glasses</h2>
+            <p>Price: $10.00</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="product" data-id="2" data-name="Markers" data-price="50.00">
+            <h2>Markers</h2>
+            <p>Price: $50.00</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="product" data-id="3" data-name="Nike Shoes" data-price="20.00">
+            <h2>Nike Shoes</h2>
+            <p>Price: $200.00</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+
+    <h2>Shopping Cart</h2>
+    <div id="cart">
+        <div id="cart-items"></div>
+        <p id="cart-total">Total: $0.00</p>
+        <button id="checkout">Checkout</button>
         <p>&copy; 2025 ProMarket. All rights reserved.</p>
     </footer>
 </body>
