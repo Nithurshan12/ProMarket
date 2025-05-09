@@ -1,0 +1,16 @@
+/* Keyframes for animations */
+@keyframes fadeInMoveUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply animation to elements */
+.animated-element {
+    animation: fadeInMoveUp 2s ease-out;
+}
