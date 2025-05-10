@@ -26,22 +26,25 @@
 
 .button:hover {
     background-color: #0056b3;
-}
+/* Style for the title */
 #promarket-title {
-    font-size: 3em; /* Make the title larger */
-    font-weight: bold; /* Make the text bold */
-    text-align: center; /* Center the title */
-    margin-bottom: 20px; /* Add space below the title */
-    color: #333; /* Set the text color */
+    background-color: #FFFF00; /* Light yellow background */
+    color: #333333; /* Dark text for contrast */
+    font-size: 3em; /* Set font size */
+    font-weight: bold; /* Make text bold */
+    text-align: center; /* Center the text */
+    padding: 20px; /* Add padding around the title */
+    margin: 10px auto; /* Add margin and center the title block */
+    border: 2px solid #CCCC00; /* Optional: Add a border in a slightly darker yellow */
+    border-radius: 10px; /* Optional: Round the corners */
+    width: fit-content; /* Adjust width to fit the content */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow */
 }
 
-.content {
-    margin-top: 20px; /* Add space above the website content */
-}
-#promarket-title {
-    background-color: #FFFFE0#; /* Light Yellow background */
-    color: black; /* black text for contrast */
-    padding: 20px; /* Add padding around the text */
-    text-align: center; /* Center the title */
-    border-radius: 10px; /* Optionally, round the corners */
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    #promarket-title {
+        font-size: 2em; /* Reduce font size on smaller screens */
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
 }
