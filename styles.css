@@ -43,4 +43,7 @@
     font-size: 2em; /* Adjusts the size of the text */
     text-align: center; /* Centers the title */
     color: #000; /* Sets the text color to black */
+body {
+    background-color: #F3DFBF; /* Replace #F3DFBF with your desired color */
+}
 }
