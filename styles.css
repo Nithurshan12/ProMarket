@@ -27,3 +27,14 @@
 .button:hover {
     background-color: #0056b3;
 }
+#promarket-title {
+    font-size: 3em; /* Make the title larger */
+    font-weight: bold; /* Make the text bold */
+    text-align: center; /* Center the title */
+    margin-bottom: 20px; /* Add space below the title */
+    color: #333; /* Set the text color */
+}
+
+.content {
+    margin-top: 20px; /* Add space above the website content */
+}
