@@ -1,3 +1,21 @@
+@app.route('/products', methods=['GET'])
+def get_products():
+    category = request.args.get('category')
+    query = 'SELECT * FROM products'
+    params = ()
+
+    if category and category != 'all':
+        query += ' WHERE category = ?'
+        params = (category,)
+
+    conn = sqlite3.connect('products.db')
+    cursor = conn.cursor()
+    cursor.execute(query, params)
+    products = cursor.fetchall()
+    conn.close()
+
+    return jsonify(products)
+
 from flask import Flask, request, jsonify
 import sqlite3
 import hashlib
