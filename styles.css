@@ -1,3 +1,24 @@
+#promarket-title {
+    background-color: #90EE90; /* Light green background */
+    color: #333333; /* Dark text for contrast */
+    font-size: 3em; /* Adjust font size */
+    font-weight: bold; /* Make text bold */
+    text-align: center; /* Center-align the text */
+    padding: 20px; /* Add padding around the title */
+    border: 2px solid #70C570; /* Optional: Add a border in a slightly darker green */
+    border-radius: 10px; /* Optional: Round the corners */
+    width: fit-content; /* Adjust width to fit the content */
+    margin: 10px auto; /* Center the title block */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    #promarket-title {
+        font-size: 2em; /* Reduce font size on smaller screens */
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+}
 /* Keyframes for animations */
 @keyframes fadeInMoveUp {
     0% {
@@ -27,44 +48,3 @@
 .button:hover {
     background-color: #0056b3;
 
-/* Style for the title */
-#promarket-title {
-    background-color:#promarket-title {
-    background-color: #90EE90; /* Light green background */
-    color: #333333; /* Dark text for contrast */
-    font-size: 3em; /* Adjust font size */
-    font-weight: bold; /* Make text bold */
-    text-align: center; /* Center-align the text */
-    padding: 20px; /* Add padding around the title */
-    border: 2px solid #CCCC00; /* Optional: Add a border in a slightly darker green */
-    border-radius: 10px; /* Optional: Round the corners */
-    width: fit-content; /* Adjust width to fit the content */
-    margin: 10px auto; /* Center the title block */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow */
-}
-
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
-    #promarket-title {
-        font-size: 2em; /* Reduce font size on smaller screens */
-        padding: 15px; /* Adjust padding for smaller screens */
-    }; /* Light green background */
-    color: #333333; /* Dark text for contrast */
-    font-size: 3em; /* Set font size */
-    font-weight: bold; /* Make text bold */
-    text-align: center; /* Center the text */
-    padding: 20px; /* Add padding around the title */
-    margin: 10px auto; /* Add margin and center the title block */
-    border: 2px solid #CCCC00; /* Optional: Add a border in a slightly darker green */
-    border-radius: 10px; /* Optional: Round the corners */
-    width: fit-content; /* Adjust width to fit the content */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow */
-}
-
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
-    #promarket-title {
-        font-size: 2em; /* Reduce font size on smaller screens */
-        padding: 15px; /* Adjust padding for smaller screens */
-    }
-}
