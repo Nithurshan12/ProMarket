@@ -15,7 +15,6 @@ def get_products():
     conn.close()
 
     return jsonify(products)
-
 from flask import Flask, request, jsonify
 import sqlite3
 import hashlib
