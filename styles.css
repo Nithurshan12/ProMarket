@@ -48,14 +48,14 @@
     #promarket-title {
         font-size: 2em; /* Reduce font size on smaller screens */
         padding: 15px; /* Adjust padding for smaller screens */
-    }; /* Light yellow background */
+    }; /* Light green background */
     color: #333333; /* Dark text for contrast */
     font-size: 3em; /* Set font size */
     font-weight: bold; /* Make text bold */
     text-align: center; /* Center the text */
     padding: 20px; /* Add padding around the title */
     margin: 10px auto; /* Add margin and center the title block */
-    border: 2px solid #CCCC00; /* Optional: Add a border in a slightly darker yellow */
+    border: 2px solid #CCCC00; /* Optional: Add a border in a slightly darker green */
     border-radius: 10px; /* Optional: Round the corners */
     width: fit-content; /* Adjust width to fit the content */
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow */
