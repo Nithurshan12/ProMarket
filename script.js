@@ -1,5 +1,4 @@
-
-function filterByCategory() {
+const response = await fetch('https://your-backend-url/best-product');function filterByCategory() {
     const selectedCategory = document.getElementById('category').value;
     const products = document.querySelectorAll('.product');
 
