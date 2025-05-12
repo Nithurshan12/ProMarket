@@ -1,4 +1,20 @@
-@app.route('/products', methods=['GET'])
+
+from flask import Flask, request, render_template
+
+app = Flask(__name__)
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        message = request.form['message']
+        # Handle the form submission (e.g., save to database or send an email)
+        return f"Thank you, {name}! We have received your message."
+    return render_template('contact.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)@app.route('/products', methods=['GET'])
 def get_products():
     category = request.args.get('category')
     query = 'SELECT * FROM products'
