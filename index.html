@@ -26,26 +26,6 @@
         <button onclick="fetchBestProduct()">ProMarket AI Recommender</button>
         <div id="output"></div>
         <script>
-  async function fetchBestProduct() {
-    try {
-      const response = await fetch('http://127.0.0.1:5000/best-product');
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const data = await response.json();
-      document.getElementById('output').innerHTML = `
-        <h2>Best Product Recommendation</h2>
-        <p><strong>Name:</strong> ${data.name}</p>
-        <p><strong>Price:</strong> $${data.price}</p>
-        <p><strong>Rating:</strong> ${data.rating}</p>
-      `;
-    } catch (error) {
-      console.error('Error fetching the best product:', error);
-      document.getElementById('output').innerText =
-        'Failed to fetch the best product. Please try again later.';
-    }
-  }
-</script>
 </header>
 html>
 <body>   
