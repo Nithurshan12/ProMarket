@@ -1,5 +1,3 @@
-    const response = await fetch('http://127.0.0.1:5000/best-product');function filterByCategory() {
-    
     const selectedCategory = document.getElementById('category').value;
     const products = document.querySelectorAll('.product');
 
