@@ -41,22 +41,27 @@ function updateCart() {
         total += item.price;
     });
 
-    // Update the total price
-    cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
-}
-
-// Function to handle checkout
-function checkout() {
+    function checkout() {
     if (cart.length === 0) {
-        alert('Your cart is empty!');
+        alert('Your cart is empty. Please add items to the cart before checking out.');
         return;
     }
 
-    alert('Thank you for your purchase!');
-    cart = []; // Clear the cart
-    updateCart();
-}
+    let cartSummary = 'You have the following items in your cart:\n\n';
+    cart.forEach((item, index) => {
+        cartSummary += `${index + 1}. ${item.name} - $${item.price.toFixed(2)}\n`;
+    });
 
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    cartSummary += `\nTotal: $${total.toFixed(2)}\n\n`;
+
+    const confirmCheckout = confirm(cartSummary + 'Proceed to checkout?');
+    if (confirmCheckout) {
+        alert('Thank you for your purchase! Your order is being processed.');
+        cart = []; // Clear the cart
+        updateCart(); // Update the cart display
+    }
+}
 // Attach event listeners to buttons
 document.querySelectorAll('.add-to-cart').forEach(button => {
     button.addEventListener('click', addToCart);
