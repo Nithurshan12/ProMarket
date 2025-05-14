@@ -142,10 +142,23 @@
         }
 
         function checkout() {
-            alert('Checkout functionality is coming soon!');
-        }
+            if (cart.length === 0) {
+        alert('Your cart is empty. Please add items to checkout.');
+        return;
+    }
 
-        function signUp() {
+    // Calculate total price
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+    // Display summary and confirm checkout
+    const confirmCheckout = confirm(`Your total is $${total.toFixed(2)}. Proceed to checkout?`);
+    if (confirmCheckout) {
+        alert('Thank you for your purchase!');
+        cart = []; // Clear the cart
+        updateCart(); // Refresh the cart display
+    }
+}           
+            function signUp() {
             alert('Sign-up functionality is coming soon!');
         }
     </script>
