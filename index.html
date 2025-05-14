@@ -40,7 +40,7 @@
             <div class="animated-element">
                 <h1 class="bold-text">Welcome To ProMarket!</h1>
             </div>
-            <button class="animated-element">Sign Up</button>
+            <button class="animated-element" onclick="signUp()">Sign Up</button>
             <p>Your trusted online marketplace for buying and selling.</p>
             <p>We all know that shopping can be a hassle, both online and offline. So, we created ProMarket, a place where you can buy the things that you want safely.</p>
             <a href="products.html" class="btn">Browse Products</a>
@@ -51,27 +51,27 @@
             <div class="product" data-category="electronics">
                 <h2>Google Pixel 9A</h2>
                 <p>Price: $500.00</p>
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" onclick="addToCart('Google Pixel 9A', 500.00)">Add to Cart</button>
             </div>
             <div class="product" data-category="fashion">
                 <h2>Tommy Hilfiger Jacket</h2>
                 <p>Price: $100.00</p>
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" onclick="addToCart('Tommy Hilfiger Jacket', 100.00)">Add to Cart</button>
             </div>
             <div class="product" data-id="1" data-name="Glasses" data-price="10.00">
                 <h2>Glasses</h2>
                 <p>Price: $10.00</p>
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" onclick="addToCart('Glasses', 10.00)">Add to Cart</button>
             </div>
             <div class="product" data-id="2" data-name="Markers" data-price="50.00">
                 <h2>Markers</h2>
                 <p>Price: $50.00</p>
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" onclick="addToCart('Markers', 50.00)">Add to Cart</button>
             </div>
             <div class="product" data-id="3" data-name="Nike Shoes" data-price="200.00">
                 <h2>Nike Shoes</h2>
                 <p>Price: $200.00</p>
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" onclick="addToCart('Nike Shoes', 200.00)">Add to Cart</button>
             </div>
         </section>
 
@@ -79,7 +79,7 @@
             <h2>Shopping Cart</h2>
             <div id="cart-items"></div>
             <p id="cart-total">Total: $0.00</p>
-            <button id="checkout">Checkout</button>
+            <button id="checkout" onclick="checkout()">Checkout</button>
         </section>
     </main>
 
@@ -89,6 +89,61 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="script.js"></script>
+    <script>
+        let cart = [];
+
+        function filterByCategory() {
+            const category = document.getElementById('category').value;
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                if (category === 'all' || product.dataset.category === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function searchProducts(event) {
+            event.preventDefault();
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                const name = product.querySelector('h2').textContent.toLowerCase();
+                if (name.includes(query)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            cartItems.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                const div = document.createElement('div');
+                div.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+                cartItems.appendChild(div);
+                total += item.price;
+            });
+            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        function checkout() {
+            alert('Checkout functionality is coming soon!');
+        }
+
+        function signUp() {
+            alert('Sign-up functionality is coming soon!');
+        }
+    </script>
 </body>
 </html>
