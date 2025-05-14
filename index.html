@@ -1,34 +1,3 @@
-<header>
-<!DOCTYPE html>
- <h1 id="promarket-title">ProMarket</h1>
-<label for="category">Filter by Category:</label>
-<select id="category" onchange="filterByCategory()">
-    <option value="all">All</option>
-    <option value="electronics">Electronics</option>
-    <option value="fashion">Fashion</option>
-    <option value="books">Books</option>
-    <option value="books">Drawing Tools</option>
-</select>
-</select>
-<hr>
-<div class="content">
-    <!-- Rest of your website content goes here -->
-           <li><a href="index.html">Home</a></li>
-           <li><a href="products.html">Products</a></li>
-           <li><a href="index.html">About</a></li>
-           <li><a href="index.html">Contact</a></li>           
-    </nav> 
-    </div><nav>
-    <!-- Search Bar -->
-    <form></form> class="search-bar" onsubmit="searchProducts(event)">
-        <input type="text" id="searchInput" placeholder="Search products..." />
-        <button type="submit">Search</button>
-        <div id="output"></div>
-        <script>
-<header>
-<html>
-<body>   
-</body>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,158 +7,88 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Header Section -->
     <header>
+        <h1 id="promarket-title">ProMarket</h1>
+        <label for="category">Filter by Category:</label>
+        <select id="category" onchange="filterByCategory()">
+            <option value="all">All</option>
+            <option value="electronics">Electronics</option>
+            <option value="fashion">Fashion</option>
+            <option value="books">Books</option>
+            <option value="drawing-tools">Drawing Tools</option>
+        </select>
+        <hr>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
+        <!-- Search Bar -->
+        <form class="search-bar" onsubmit="searchProducts(event)">
+            <input type="text" id="searchInput" placeholder="Search products..." />
+            <button type="submit">Search</button>
+        </form>
     </header>
+
+    <!-- Main Content Section -->
     <main>
         <section class="welcome">
-        <div class="animated-element"><h1 class="bold-text">Welcome To ProMarket!</h1></div>
-        <button class="animated-element">Sign Up</button>
-            <p>Your trusted online marketplace for buying and selling.<p>
-            <p>We all know that shopping can be a hassle, both online and real life. So, we created ProMarket, a place where you can buy the things that you want safely.</p>
+            <div class="animated-element">
+                <h1 class="bold-text">Welcome To ProMarket!</h1>
+            </div>
+            <button class="animated-element">Sign Up</button>
+            <p>Your trusted online marketplace for buying and selling.</p>
+            <p>We all know that shopping can be a hassle, both online and offline. So, we created ProMarket, a place where you can buy the things that you want safely.</p>
             <a href="products.html" class="btn">Browse Products</a>
         </section>
+
+        <section class="products">
+            <h1>Trending Products</h1>
+            <div class="product" data-category="electronics">
+                <h2>Google Pixel 9A</h2>
+                <p>Price: $500.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product" data-category="fashion">
+                <h2>Tommy Hilfiger Jacket</h2>
+                <p>Price: $100.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product" data-id="1" data-name="Glasses" data-price="10.00">
+                <h2>Glasses</h2>
+                <p>Price: $10.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product" data-id="2" data-name="Markers" data-price="50.00">
+                <h2>Markers</h2>
+                <p>Price: $50.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product" data-id="3" data-name="Nike Shoes" data-price="200.00">
+                <h2>Nike Shoes</h2>
+                <p>Price: $200.00</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </section>
+
+        <section class="cart">
+            <h2>Shopping Cart</h2>
+            <div id="cart-items"></div>
+            <p id="cart-total">Total: $0.00</p>
+            <button id="checkout">Checkout</button>
+        </section>
     </main>
+
+    <!-- Footer Section -->
     <footer>
         <p>&copy; 2025 ProMarket. All rights reserved.</p>
     </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
-      </ul>
-        </nav>
-    </header>
-    <main>
-        <section class="products">
-          <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trending Products</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <h1>Trending Products</h1>
-    <div class="products">
-      <div class="product" data-category="electronics">
-        <h2>Google Pixel 9A</h2>
-        <p>Price: $500.00</p>
-       <button class="add-to-cart">Add to Cart</button>
-    </div>
-    <div class="product" data-category="fashion">
-        <h2>Tommy Hilfiger Jacket</h2>
-        <p>Price: $100.00</p>
-     <button class="add-to-cart">Add to Cart</button>
-    </div>
-</div>
-        <div class="product" data-id="1" data-name="Glasses" data-price="10.00">
-            <h2>Glasses</h2>
-            <p>Price: $10.00</p>
-            <button class="add-to-cart">Add to Cart</button>
-        </div>
-        <div class="product" data-id="2" data-name="Markers" data-price="50.00">
-            <h2>Markers</h2>
-            <p>Price: $50.00</p>
-            <button class="add-to-cart">Add to Cart</button>
-        </div>
-        <div class="product" data-id="3" data-name="Nike Shoes" data-price="20.00">
-            <h2>Nike Shoes</h2>
-            <p>Price: $200.00</p>
-            <button class="add-to-cart">Add to Cart</button>
-        </div>
-    </div>
-
-    <h2>Shopping Cart</h2>
-    <div id="cart">
-        <div id="cart-items"></div>
-        <p id="cart-total">Total: $0.00</p>
-        <button id="checkout">Checkout</button>
-        <p>&copy; 2025 ProMarket. All rights reserved.</p>
-    </footer>
-    <script src="script.js"></script> 
-</body>
-</html>
-3. styles.css
-CSS
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-}
-
-header {
-    background: #333;
-    color: #fff;
-    padding: 1rem 0;
-    text-align: center;
-}
-
-header h1 {
-    margin: 0;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 10px;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-main {
-    padding: 2rem;
-    text-align: center;
-}
-
-.welcome {
-    padding: 2rem;
-    background: #f4f4f4;
-    margin: 2rem 0;
-}
-
-.welcome .btn {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background: #333;
-    color: #fff;
-    text-decoration: none;
-    margin-top: 1rem;
-}
-
-.products {
-    padding: 1rem;
-    background: #f9f9f9;
-}
-
-.product-list {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.product {
-    border: 1px solid #ddd;
-    padding: 1rem;
-    margin: 1rem;
-    width: 30%;
-    background: #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-footer {
-    text-align: center;
-    padding: 1rem 0;
-    background: #333;
-    color: #fff;
-    margin-top: 2rem;
-}
