@@ -1,15 +1,14 @@
+// Function to filter products by category
+function filterByCategory() {
     const selectedCategory = document.getElementById('category').value;
     const products = document.querySelectorAll('.product');
 
     products.forEach(product => {
         const productCategory = product.getAttribute('data-category');
-        if (selectedCategory === 'all' || productCategory === selectedCategory) {
-            product.style.display = 'block';
-        } else {
-            product.style.display = 'none';
-        }
+        product.style.display = (selectedCategory === 'all' || productCategory === selectedCategory) ? 'block' : 'none';
     });
 }
+
 // Initialize an empty cart
 let cart = [];
 
@@ -41,12 +40,18 @@ function updateCart() {
         total += item.price;
     });
 
-    function checkout() {
+    // Update the total price
+    cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
+}
+
+// Function to handle the checkout process
+function checkout() {
     if (cart.length === 0) {
         alert('Your cart is empty. Please add items to the cart before checking out.');
         return;
     }
 
+    // Generate the cart summary
     let cartSummary = 'You have the following items in your cart:\n\n';
     cart.forEach((item, index) => {
         cartSummary += `${index + 1}. ${item.name} - $${item.price.toFixed(2)}\n`;
@@ -55,13 +60,17 @@ function updateCart() {
     const total = cart.reduce((sum, item) => sum + item.price, 0);
     cartSummary += `\nTotal: $${total.toFixed(2)}\n\n`;
 
+    // Confirm checkout
     const confirmCheckout = confirm(cartSummary + 'Proceed to checkout?');
     if (confirmCheckout) {
         alert('Thank you for your purchase! Your order is being processed.');
-        cart = []; // Clear the cart
-        updateCart(); // Update the cart display
+
+        // Clear the cart
+        cart = [];
+        updateCart();
     }
 }
+
 // Attach event listeners to buttons
 document.querySelectorAll('.add-to-cart').forEach(button => {
     button.addEventListener('click', addToCart);
