@@ -132,14 +132,155 @@
 
     <!-- AI Chatbot -->
     <div class="chatbot-container" id="chatbot">
-        <div class="chatbot-header">ProMarket Chatbot</div>
-        <div class="chatbot-messages" id="chatMessages"></div>
-        <div class="chatbot-input">
-            <input type="text" id="chatInput" placeholder="Type your message..." />
-            <button onclick="sendMessage()">Send</button>
-            </div>
-     </div>
-    
+    <div class="chatbot-header">
+        <span>ProMarket Chatbot</span>
+        <button onclick="toggleChatbot()" id="toggleButton">-</button>
+    </div>
+    <div class="chatbot-messages" id="chatMessages"></div>
+    <div class="chatbot-typing" id="chatTyping" style="display: none;">Chatbot is typing...</div>
+    <div class="chatbot-input">
+        <input type="text" id="chatInput" placeholder="Type your message..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<style>
+    .chatbot-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 300px;
+        max-height: 400px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    .chatbot-header {
+        background-color: #007bff;
+        color: white;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .chatbot-header button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .chatbot-messages {
+        flex-grow: 1;
+        padding: 10px;
+        overflow-y: auto;
+    }
+    .chatbot-typing {
+        font-size: 12px;
+        color: gray;
+        margin: 5px;
+        text-align: center;
+    }
+    .chatbot-messages .message {
+        margin: 5px 0;
+    }
+    .message.bot {
+        color: #007bff;
+        text-align: left;
+    }
+    .message.user {
+        color: #333;
+        text-align: right;
+    }
+    .chatbot-input {
+        display: flex;
+        border-top: 1px solid #ddd;
+    }
+    .chatbot-input input {
+        flex-grow: 1;
+        border: none;
+        padding: 10px;
+        border-bottom-left-radius: 10px;
+    }
+    .chatbot-input button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-bottom-right-radius: 10px;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+    const messagesDiv = document.getElementById('chatMessages');
+    const chatTypingDiv = document.getElementById('chatTyping');
+    const chatInput = document.getElementById('chatInput');
+
+    // Load chat history on page load
+    window.onload = () => {
+        chatHistory.forEach(({ sender, message }) => addMessage(sender, message));
+    };
+
+    function toggleChatbot() {
+        const chatbot = document.getElementById('chatbot');
+        const toggleButton = document.getElementById('toggleButton');
+        if (chatbot.style.maxHeight === '40px') {
+            chatbot.style.maxHeight = '400px';
+            toggleButton.textContent = '-';
+        } else {
+            chatbot.style.maxHeight = '40px';
+            toggleButton.textContent = '+';
+        }
+    }
+
+    function sendMessage() {
+        const userMessage = chatInput.value.trim();
+        if (!userMessage) return;
+
+        addMessage('You', userMessage);
+        chatInput.value = '';
+
+        // Show typing indicator
+        chatTypingDiv.style.display = 'block';
+
+        // Simulate chatbot response
+        setTimeout(() => {
+            const botResponse = getResponse(userMessage.toLowerCase());
+            addMessage('Bot', botResponse);
+            chatTypingDiv.style.display = 'none';
+        }, 1000);
+    }
+
+    function addMessage(sender, message) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', sender === 'You' ? 'user' : 'bot');
+        messageDiv.textContent = `${sender}: ${message}`;
+        messagesDiv.appendChild(messageDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+        // Save to history
+        chatHistory.push({ sender, message });
+        localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+    }
+
+    function getResponse(message) {
+        const responses = {
+            "hello": "Hi! How can I assist you today?",
+            "help": "I can help you search for products, add items to your cart, or answer any questions about ProMarket.",
+            "bye": "Goodbye! Have a great day!",
+            "default": "I'm not sure how to respond to that. Can you rephrase?"
+        };
+        return responses[message] || responses['default'];
+    }
+</script>    
     <!-- Footer Section -->
     <footer>
         <p>&copy; 2025 ProMarket. All rights reserved.</p>
