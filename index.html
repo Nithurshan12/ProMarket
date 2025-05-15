@@ -137,9 +137,44 @@
         <div class="chatbot-input">
             <input type="text" id="chatInput" placeholder="Type your message..." />
             <button onclick="sendMessage()">Send</button>
-        </div>
-    </div>
+            <script>
+    // Updated responses object with category recommendations
+    const products = {
+        electronics: [
+            "Google Pixel 9A - $500",
+        ],
+        fashion: [
+            "Tommy Hilfiger Jacket - $100",
+            "Nike Shoes - $200",
+        ],
+     ]
+    };
 
+    function recommendProducts(category) {
+        if (products[category]) {
+            return `Here are some products from the ${category} category:\n` +
+                   products[category].map((product, i) => `${i + 1}. ${product}`).join("\n");
+        } else {
+            return "Sorry, I couldn't find any products in that category. Please try another category.";
+        }
+    }
+
+    function getResponse(message) {
+        const lowerCaseMessage = message.toLowerCase();
+
+        // Check if the user is asking for recommendations
+        if (lowerCaseMessage.includes("recommend") && lowerCaseMessage.includes("category")) {
+            const words = lowerCaseMessage.split(" ");
+            const category = words[words.length - 1]; // Assumes category is the last word
+            return recommendProducts(category);
+        }
+
+        // Default chatbot responses
+        return responses[message] || responses["default"];
+    }
+</script>        
+    <div>
+    </div>
     <!-- Footer Section -->
     <footer>
         <p>&copy; 2025 ProMarket. All rights reserved.</p>
