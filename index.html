@@ -110,22 +110,27 @@
                 <p>Price: $10.00</p>
                 <button class="add-to-cart" onclick="addToCart('Glasses', 10.00)">Add to Cart</button>
             </div>
-            <div class="product" data-category="Drawing Tools">
-                    <h2>Markers</h2>
-                    <p>Price: $50.00</p>
-                    <button class="add-to-cart" onclick="addToCart('Markers', 50.00)">Add to Cart</button>
+            <div class="product" data-id="2" data-name="Markers" data-price="50.00">
+                <h2>Markers</h2>
+                <p>Price: $50.00</p>
+                <button class="add-to-cart" onclick="addToCart('Markers', 50.00)">Add to Cart</button>
             </div>
-            <div class="product" data-category="Fashion">
-                    <h2>Nike Shoes</h2>
-                    <p>Price: $200.00</p>
-                    <button class="add-to-cart" onclick="addToCart('Nike Shoes', 200.00)">Add to Cart</button>
+            <div class="product" data-id="3" data-name="Nike Shoes" data-price="200.00">
+                <h2>Nike Shoes</h2>
+                <p>Price: $200.00</p>
+                <button class="add-to-cart" onclick="addToCart('Nike Shoes', 200.00)">Add to Cart</button>
             </div>
         </section>
-    </main>
-    <button id="checkout" onclick="checkout()">Checkout</button>
+
+        <section class="cart">
+            <h2>Shopping Cart</h2>
+            <div id="cart-items"></div>
+            <p id="cart-total">Total: $0.00</p>
+            <button id="checkout" onclick="checkout()">Checkout</button>
         </section>
     </main>
-   <!-- AI Chatbot -->
+
+    <!-- AI Chatbot -->
     <div class="chatbot-container" id="chatbot">
         <div class="chatbot-header">ProMarket Chatbot</div>
         <div class="chatbot-messages" id="chatMessages"></div>
@@ -153,6 +158,70 @@
             "default": "I'm not sure how to respond to that. Can you rephrase?"
         };
 
+        function filterByCategory() {
+            const category = document.getElementById('category').value;
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                if (category === 'all' || product.dataset.category === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function searchProducts(event) {
+            event.preventDefault();
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                const name = product.querySelector('h2').textContent.toLowerCase();
+                if (name.includes(query)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            cartItems.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                const div = document.createElement('div');
+                div.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+                cartItems.appendChild(div);
+                total += item.price;
+            });
+            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty. Please add items to checkout.');
+                return;
+            }
+
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const confirmCheckout = confirm(`Your total is $${total.toFixed(2)}. Proceed to checkout?`);
+            if (confirmCheckout) {
+                alert('Thank you for your purchase!');
+                cart = [];
+                updateCart();
+            }
+        }
+
+        function signUp() {
+            alert('Sign-up functionality is coming soon!');
+        }
+
         function sendMessage() {
             const userMessage = input.value.trim();
             if (!userMessage) return;
@@ -174,12 +243,6 @@
         function getResponse(message) {
             return responses[message] || responses["default"];
         }
-        
-            function addToCart(name, price) {
-            cart.push({ name, price });
-            alert(`${name} has been added to your cart.`);
-        }
     </script>
 </body>
 </html>
-   
