@@ -5,6 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProMarket - Home</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            max-height: 400px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+        .chatbot-header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            text-align: center;
+        }
+        .chatbot-messages {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        .chatbot-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        .chatbot-input input {
+            flex-grow: 1;
+            border: none;
+            padding: 10px;
+            border-bottom-left-radius: 10px;
+        }
+        .chatbot-input button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-bottom-right-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <!-- Header Section -->
@@ -63,25 +110,18 @@
                 <p>Price: $10.00</p>
                 <button class="add-to-cart" onclick="addToCart('Glasses', 10.00)">Add to Cart</button>
             </div>
-            <div class="product" data-id="2" data-name="Markers" data-price="50.00">
-                <h2>Markers</h2>
-                <p>Price: $50.00</p>
-                <button class="add-to-cart" onclick="addToCart('Markers', 50.00)">Add to Cart</button>
-            </div>
-            <div class="product" data-id="3" data-name="Nike Shoes" data-price="200.00">
-                <h2>Nike Shoes</h2>
-                <p>Price: $200.00</p>
-                <button class="add-to-cart" onclick="addToCart('Nike Shoes', 200.00)">Add to Cart</button>
-            </div>
-        </section>
-
-        <section class="cart">
-            <h2>Shopping Cart</h2>
-            <div id="cart-items"></div>
-            <p id="cart-total">Total: $0.00</p>
-            <button id="checkout" onclick="checkout()">Checkout</button>
         </section>
     </main>
+
+    <!-- AI Chatbot -->
+    <div class="chatbot-container" id="chatbot">
+        <div class="chatbot-header">ProMarket Chatbot</div>
+        <div class="chatbot-messages" id="chatMessages"></div>
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="Type your message..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
 
     <!-- Footer Section -->
     <footer>
@@ -91,72 +131,36 @@
     <!-- JavaScript -->
     <script>
         let cart = [];
+        const messages = document.getElementById('chatMessages');
+        const input = document.getElementById('chatInput');
 
-        function filterByCategory() {
-            const category = document.getElementById('category').value;
-            const products = document.querySelectorAll('.product');
-            products.forEach(product => {
-                if (category === 'all' || product.dataset.category === category) {
-                    product.style.display = 'block';
-                } else {
-                    product.style.display = 'none';
-                }
-            });
+        const responses = {
+            "hello": "Hi! How can I assist you today?",
+            "help": "I can help you search for products, add items to your cart, or answer any questions you have about ProMarket.",
+            "bye": "Goodbye! Have a great day.",
+            "default": "I'm not sure how to respond to that. Can you rephrase?"
+        };
+
+        function sendMessage() {
+            const userMessage = input.value.trim();
+            if (!userMessage) return;
+
+            addMessage("You", userMessage);
+            const response = getResponse(userMessage.toLowerCase());
+            addMessage("AI", response);
+
+            input.value = '';
         }
 
-        function searchProducts(event) {
-            event.preventDefault();
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const products = document.querySelectorAll('.product');
-            products.forEach(product => {
-                const name = product.querySelector('h2').textContent.toLowerCase();
-                if (name.includes(query)) {
-                    product.style.display = 'block';
-                } else {
-                    product.style.display = 'none';
-                }
-            });
+        function addMessage(sender, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = `${sender}: ${message}`;
+            messages.appendChild(messageDiv);
+            messages.scrollTop = messages.scrollHeight;
         }
 
-        function addToCart(name, price) {
-            cart.push({ name, price });
-            updateCart();
-        }
-
-        function updateCart() {
-            const cartItems = document.getElementById('cart-items');
-            const cartTotal = document.getElementById('cart-total');
-            cartItems.innerHTML = '';
-            let total = 0;
-            cart.forEach(item => {
-                const div = document.createElement('div');
-                div.textContent = `${item.name} - $${item.price.toFixed(2)}`;
-                cartItems.appendChild(div);
-                total += item.price;
-            });
-            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
-        }
-
-        function checkout() {
-            if (cart.length === 0) {
-                alert('Your cart is empty. Please add items to checkout.');
-                return;
-            }
-
-            // Calculate total price
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-
-            // Display summary and confirm checkout
-            const confirmCheckout = confirm(`Your total is $${total.toFixed(2)}. Proceed to checkout?`);
-            if (confirmCheckout) {
-                alert('Thank you for your purchase!');
-                cart = []; // Clear the cart
-                updateCart(); // Refresh the cart display
-            }
-        }
-
-        function signUp() {
-            alert('Sign-up functionality is coming soon!');
+        function getResponse(message) {
+            return responses[message] || responses["default"];
         }
     </script>
 </body>
