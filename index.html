@@ -110,10 +110,22 @@
                 <p>Price: $10.00</p>
                 <button class="add-to-cart" onclick="addToCart('Glasses', 10.00)">Add to Cart</button>
             </div>
+            <div class="product" data-category="Drawing Tools">
+                    <h2>Markers</h2>
+                    <p>Price: $50.00</p>
+                    <button class="add-to-cart" onclick="addToCart('Markers', 50.00)">Add to Cart</button>
+            </div>
+            <div class="product" data-category="Fashion">
+                    <h2>Nike Shoes</h2>
+                    <p>Price: $200.00</p>
+                    <button class="add-to-cart" onclick="addToCart('Nike Shoes', 200.00)">Add to Cart</button>
+            </div>
         </section>
     </main>
-
-    <!-- AI Chatbot -->
+    <button id="checkout" onclick="checkout()">Checkout</button>
+        </section>
+    </main>
+   <!-- AI Chatbot -->
     <div class="chatbot-container" id="chatbot">
         <div class="chatbot-header">ProMarket Chatbot</div>
         <div class="chatbot-messages" id="chatMessages"></div>
@@ -162,6 +174,12 @@
         function getResponse(message) {
             return responses[message] || responses["default"];
         }
+        
+            function addToCart(name, price) {
+            cart.push({ name, price });
+            alert(`${name} has been added to your cart.`);
+        }
     </script>
 </body>
 </html>
+   
