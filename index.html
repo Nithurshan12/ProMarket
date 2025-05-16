@@ -150,6 +150,152 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="main.js"></script>
+    <script>
+        // --------- Product Filtering ---------
+        document.getElementById('category').addEventListener('change', filterByCategory);
+
+        function filterByCategory() {
+            const selectedCategory = document.getElementById('category').value;
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                const productCategory = product.getAttribute('data-category');
+                product.style.display = (selectedCategory === 'all' || productCategory === selectedCategory) ? 'block' : 'none';
+            });
+        }
+
+        // --------- Product Search -----------
+        document.getElementById('searchForm').addEventListener('submit', searchProducts);
+
+        function searchProducts(event) {
+            event.preventDefault();
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                const name = product.getAttribute('data-name').toLowerCase();
+                if (name.includes(query)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        // --------- Cart Logic -----------
+        let cart = [];
+
+        function addToCart(event) {
+            const productElement = event.target.closest('.product');
+            const productName = productElement.getAttribute('data-name');
+            const productPrice = parseFloat(productElement.getAttribute('data-price'));
+            cart.push({ name: productName, price: productPrice });
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+                cartItemsContainer.appendChild(itemElement);
+                total += item.price;
+            });
+            cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty. Please add items to the cart before checking out.');
+                return;
+            }
+            let cartSummary = 'You have the following items in your cart:\n\n';
+            cart.forEach((item, index) => {
+                cartSummary += `${index + 1}. ${item.name} - $${item.price.toFixed(2)}\n`;
+            });
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            cartSummary += `\nTotal: $${total.toFixed(2)}\n\n`;
+            const confirmCheckout = confirm(cartSummary + 'Proceed to checkout?');
+            if (confirmCheckout) {
+                alert('Thank you for your purchase! Your order is being processed.');
+                cart = [];
+                updateCart();
+            }
+        }
+
+        // Add event listeners after DOM loads
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', addToCart);
+            });
+            document.getElementById('checkout').addEventListener('click', checkout);
+            document.getElementById('signUpBtn').addEventListener('click', () => {
+                alert('Sign-up functionality is coming soon!');
+            });
+        });
+
+        // --------- Chatbot Logic -----------
+        let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+        const messagesDiv = document.getElementById('chatMessages');
+        const chatTypingDiv = document.getElementById('chatTyping');
+        const chatInput = document.getElementById('chatInput');
+        const chatSendBtn = document.getElementById('chatSendBtn');
+
+        window.onload = () => {
+            chatHistory.forEach(({ sender, message }) => addMessage(sender, message));
+        };
+
+        window.toggleChatbot = function() {
+            const chatbot = document.getElementById('chatbot');
+            const toggleButton = document.getElementById('toggleButton');
+            if (chatbot.style.maxHeight === '40px') {
+                chatbot.style.maxHeight = '400px';
+                toggleButton.textContent = '-';
+            } else {
+                chatbot.style.maxHeight = '40px';
+                toggleButton.textContent = '+';
+            }
+        };
+
+        function sendMessage() {
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+            addMessage('You', userMessage);
+            chatInput.value = '';
+            chatTypingDiv.style.display = 'block';
+            setTimeout(() => {
+                const botResponse = getResponse(userMessage.toLowerCase());
+                addMessage('Bot', botResponse);
+                chatTypingDiv.style.display = 'none';
+            }, 1000);
+        }
+
+        function addMessage(sender, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender === 'You' ? 'user' : 'bot');
+            messageDiv.textContent = `${sender}: ${message}`;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            chatHistory.push({ sender, message });
+            localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+        }
+
+        function getResponse(message) {
+            const responses = {
+                "hello": "Hi! How can I assist you today?",
+                "help": "I can help you search for products, add items to your cart, or answer any questions about ProMarket.",
+                "bye": "Goodbye! Have a great day!",
+                "default": "I'm not sure how to respond to that. Can you rephrase?"
+            };
+            return responses[message] || responses['default'];
+        }
+
+        chatSendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+    </script>
 </body>
 </html>
