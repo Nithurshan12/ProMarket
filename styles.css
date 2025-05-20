@@ -9,7 +9,6 @@
         transform: translateY(0);
     }
 }
-
 /* Apply animation to elements */
 .animated-element {
     animation: fadeInMoveUp 2s ease-out;
