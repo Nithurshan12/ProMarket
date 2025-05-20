@@ -3,33 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ProMarket: Your trusted online marketplace for secure buying and selling.">
     <title>ProMarket - Home</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Inline responsiveness for critical elements - fallback if CSS doesn't load */
-        .products-listing {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .product {
-            flex: 1 1 220px;
-            min-width: 220px;
-            max-width: 300px;
-            margin: 10px auto;
-        }
-        @media (max-width: 900px) {
-            .products-listing {
-                flex-direction: column;
-                align-items: center;
-            }
-            .product {
-                width: 90%;
-                min-width: unset;
-                max-width: unset;
-            }
-        }
-    </style>
 </head>
 <body>
     <!-- Header Section -->
@@ -46,15 +22,15 @@
         <hr>
         <nav>
             <ul class="nav-list">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html" aria-current="page">Home</a></li>
                 <li><a href="products.html">Products</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
         <!-- Search Bar -->
-        <form class="search-bar" id="searchForm">
-            <input type="text" id="searchInput" placeholder="Search products..." />
+        <form class="search-bar" id="searchForm" role="search" aria-label="Product search">
+            <input type="text" id="searchInput" placeholder="Search products..." aria-label="Search products" />
             <button type="submit" class="button">Search</button>
         </form>
     </header>
@@ -102,25 +78,25 @@
             </div>
         </section>
 
-        <section class="cart">
+        <section class="cart" aria-label="Shopping cart">
             <h2>Shopping Cart</h2>
-            <div id="cart-items"></div>
+            <div id="cart-items" aria-live="polite"></div>
             <p id="cart-total">Total: $0.00</p>
             <button id="checkout" class="button">Checkout</button>
         </section>
     </main>
 
     <!-- AI Chatbot -->
-    <div class="chatbot-container" id="chatbot">
+    <div class="chatbot-container" id="chatbot" aria-live="polite" aria-label="ProMarket chatbot">
         <div class="chatbot-header">
             <span>ProMarket Chatbot</span>
-            <button onclick="toggleChatbot()" id="toggleButton">-</button>
+            <button onclick="toggleChatbot()" id="toggleButton" aria-label="Toggle chatbot">-</button>
         </div>
         <div class="chatbot-messages" id="chatMessages"></div>
         <div class="chatbot-quick-btns" id="chatQuickBtns"></div>
         <div class="chatbot-typing" id="chatTyping" style="display: none;">Chatbot is typing...</div>
         <div class="chatbot-input">
-            <input type="text" id="chatInput" placeholder="Type your message..." />
+            <input type="text" id="chatInput" placeholder="Type your message..." aria-label="Chatbot input" />
             <button id="chatSendBtn" class="button">Send</button>
         </div>
     </div>
@@ -133,6 +109,4 @@
     <!-- JavaScript -->
     <script src="script.js"></script>
 </body>
-</html>        
-         
-       
+</html>
