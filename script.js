@@ -32,13 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --------- Cart Logic -----------
-    let cart = [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     function addToCart(event) {
         const productElement = event.target.closest('.product');
         const productName = productElement.getAttribute('data-name');
         const productPrice = parseFloat(productElement.getAttribute('data-price'));
         cart.push({ name: productName, price: productPrice });
+        saveCart();
         updateCart();
     }
 
@@ -56,6 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
         cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
     }
 
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
     function checkout() {
         if (cart.length === 0) {
             alert('Your cart is empty. Please add items to the cart before checking out.');
@@ -71,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (confirmCheckout) {
             alert('Thank you for your purchase! Your order is being processed.');
             cart = [];
+            saveCart();
             updateCart();
         }
     }
@@ -79,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', addToCart);
     });
     document.getElementById('checkout').addEventListener('click', checkout);
+
     document.getElementById('signUpBtn').addEventListener('click', () => {
         alert('Sign-up functionality is coming soon!');
     });
@@ -159,8 +166,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return "I'm not sure how to respond to that. Try using the quick action buttons, or ask me about products, categories, or your cart!";
     }
 
+    function loadChatHistory() {
+        chatHistory.forEach(({ sender, message }) => addMessage(sender, message, true));
+    }
+
     // Populate chat history and quick buttons on load
-    chatHistory.forEach(({ sender, message }) => addMessage(sender, message, true));
+    loadChatHistory();
     renderQuickButtons();
 
     window.toggleChatbot = function() {
@@ -214,4 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         filterByCategory(category);
     }
-});  
+
+    // On load: update cart from localStorage
+    updateCart();
+});
