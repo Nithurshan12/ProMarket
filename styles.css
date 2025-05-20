@@ -23,12 +23,12 @@
     cursor: pointer;
     font-size: 16px;
 }
-
 .button:hover {
     background-color: #0056b3;
-/* Style for the title */
+}
+
 #promarket-title {
-    background-color: #90EE90 /* Light green background */
+    background-color: #90EE90; /* Light green background */
     color: #333333; /* Dark text for contrast */
     font-size: 3em; /* Set font size */
     font-weight: bold; /* Make text bold */
@@ -41,11 +41,200 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow */
 }
 
+/* Navigation */
+.nav-list {
+    display: flex;
+    gap: 16px;
+    list-style: none;
+    justify-content: center;
+    padding: 0;
+    margin: 0 0 16px 0;
+}
+.nav-list a {
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: 500;
+}
+.nav-list a[aria-current="page"] {
+    color: #333;
+    font-weight: bold;
+    border-bottom: 2px solid #007BFF;
+}
+
+/* Category bar */
+.category-bar {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin: 8px 0;
+}
+.category-btn {
+    background: #f0f0f0;
+    border: 1px solid #007BFF;
+    color: #007BFF;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.category-btn.active, .category-btn:hover {
+    background: #007BFF;
+    color: #fff;
+}
+
+/* Products listing */
+.products-listing {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.product {
+    flex: 1 1 220px;
+    min-width: 220px;
+    max-width: 300px;
+    margin: 10px auto;
+    border: 1px solid #ececec;
+    border-radius: 10px;
+    box-shadow: 1px 2px 8px rgba(0,0,0,0.05);
+    padding: 16px;
+    background: #fff;
+    text-align: center;
+}
+.product h2 {
+    margin: 0 0 8px 0;
+}
+
+/* Cart */
+.cart {
+    margin: 24px auto;
+    max-width: 500px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 1px 2px 8px rgba(0,0,0,0.05);
+}
+#cart-items {
+    min-height: 24px;
+    margin-bottom: 8px;
+}
+#cart-total {
+    font-weight: bold;
+}
+#checkout {
+    margin-top: 8px;
+}
+
+/* Chatbot */
+.chatbot-container {
+    max-width: 350px;
+    min-width: 240px;
+    position: fixed;
+    z-index: 1000;
+    bottom: 24px;
+    right: 24px;
+    background: #fff;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: max-height 0.2s;
+    max-height: 440px;
+    display: flex;
+    flex-direction: column;
+}
+.chatbot-header {
+    background: #007BFF;
+    color: #fff;
+    padding: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#toggleButton {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+}
+.chatbot-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background: #f8f9fa;
+    font-size: 15px;
+}
+.chatbot-input {
+    display: flex;
+    gap: 6px;
+    padding: 10px;
+    background: #f1f1f1;
+}
+.chatbot-input input[type="text"] {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 7px;
+}
+.chatbot-quick-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 6px 10px;
+    background: #f9f9f9;
+}
+.chatbot-quick-btn {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-bottom: 3px;
+}
+.chatbot-quick-btn:hover {
+    background: #0056b3;
+}
+.message.user span {
+    font-weight: bold;
+    color: #007BFF;
+}
+.message.bot span {
+    font-weight: bold;
+    color: #888;
+}
+.chatbot-typing {
+    font-size: 12px;
+    color: #555;
+    padding: 0 10px;
+    margin-bottom: 5px;
+}
+
 /* Responsive design for smaller screens */
+@media (max-width: 900px) {
+    .products-listing {
+        flex-direction: column;
+        align-items: center;
+    }
+    .product {
+        width: 90%;
+        min-width: unset;
+        max-width: unset;
+    }
+}
 @media (max-width: 768px) {
     #promarket-title {
-        font-size: 2em; /* Reduce font size on smaller screens */
-        padding: 15px; /* Adjust padding for smaller screens */
+        font-size: 2em;
+        padding: 15px;
     }
-}        
-      
+    .chatbot-container {
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+        bottom: 0;
+        max-width: 98vw;
+    }
+}
