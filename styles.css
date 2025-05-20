@@ -1,185 +1,51 @@
-/* Example CSS for ProMarket */
-
-/* Category Bar */
-#categoryBar {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 18px;
-}
-.category-btn {
-    padding: 8px 20px;
-    border: none;
-    background: #f2f2f2;
-    color: #333;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-.category-btn.active,
-.category-btn:hover {
-    background: #007bff;
-    color: #fff;
-}
-
-/* Products */
-.product {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    padding: 16px;
-    margin: 10px 0;
-    display: block;
-    transition: box-shadow 0.2s;
-}
-.product:hover {
-    box-shadow: 0 4px 16px rgba(0,0,0,0.16);
-}
-.add-to-cart {
-    background: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 14px;
-    cursor: pointer;
-    margin-top: 6px;
-}
-.add-to-cart:hover {
-    background: #218838;
-}
-
-/* Cart */
-#cart-items {
-    margin-bottom: 8px;
-}
-#cart-total {
-    font-weight: bold;
-    color: #222;
-}
-#checkout {
-    background: #ff9800;
-    border: none;
-    color: #fff;
-    padding: 8px 14px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-#checkout:hover {
-    background: #e68900;
-}
-
-/* Chatbot */
-#chatbot {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 320px;
-    max-height: 440px;
-    background: #24292f;
-    color: #fff;
-    border-radius: 12px 12px 0 0;
-    box-shadow: 0 4px 24px rgba(36,41,47,0.25);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    z-index: 1000;
-    transition: max-height 0.2s;
-}
-#toggleButton {
-    background: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 0 0 0 12px;
-    font-size: 1.2em;
-    padding: 3px 12px;
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-#chatMessages {
-    flex: 1;
-    padding: 12px;
-    overflow-y: auto;
-    font-size: 1em;
-}
-.message {
-    margin-bottom: 10px;
-    padding: 6px 10px;
-    border-radius: 8px;
-    width: fit-content;
-    max-width: 95%;
-}
-.message.user {
-    background: #007bff;
-    color: #fff;
-    align-self: flex-end;
-}
-.message.bot {
-    background: #f2f2f2;
-    color: #222;
-    align-self: flex-start;
-}
-#chatTyping {
-    font-style: italic;
-    color: #bbb;
-    padding: 0 12px 8px 12px;
-}
-#chatInput {
-    width: 70%;
-    padding: 8px;
-    border: none;
-    border-radius: 4px;
-    margin: 8px;
-}
-#chatSendBtn {
-    background: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 7px 14px;
-    cursor: pointer;
-    margin: 8px 0;
-}
-#chatSendBtn:hover {
-    background: #218838;
-}
-#chatQuickBtns {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    padding: 0 12px 12px 12px;
-}
-.chatbot-quick-btn {
-    background: #f2f2f2;
-    color: #24292f;
-    border: none;
-    border-radius: 4px;
-    padding: 6px 12px;
-    cursor: pointer;
-    margin-bottom: 4px;
-    font-size: 0.97em;
-}
-.chatbot-quick-btn:hover {
-    background: #007bff;
-    color: #fff;
-}
-
-/* Responsive */
-@media (max-width: 540px) {
-    #chatbot {
-        width: 98vw;
-        right: 1vw;
-        bottom: 0;
-        border-radius: 12px 12px 0 0;
+/* Keyframes for animations */
+@keyframes fadeInMoveUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f7f9fa;
-    margin: 0;
-    color: #222;
+/* Apply animation to elements */
+.animated-element {
+    animation: fadeInMoveUp 2s ease-out;
 }
- 
-        
+.button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+/* Style for the title */
+#promarket-title {
+    background-color: #90EE90 /* Light green background */
+    color: #333333; /* Dark text for contrast */
+    font-size: 3em; /* Set font size */
+    font-weight: bold; /* Make text bold */
+    text-align: center; /* Center the text */
+    padding: 20px; /* Add padding around the title */
+    margin: 10px auto; /* Add margin and center the title block */
+    border: 2px solid #006400; /* Optional: Add a border in a slightly darker green */
+    border-radius: 10px; /* Optional: Round the corners */
+    width: fit-content; /* Adjust width to fit the content */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    #promarket-title {
+        font-size: 2em; /* Reduce font size on smaller screens */
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+}        
       
