@@ -6,36 +6,88 @@
     <title>ProMarket - Home</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* General Button Styles */
+        .button, .category-btn, .chatbot-quick-btn {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            margin: 3px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        .button:hover, .category-btn:hover, .chatbot-quick-btn:hover {
+            background: #0056b3;
+        }
+        .category-btn.active {
+            background: #0056b3;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,123,255,0.10);
+        }
+
+        /* Category Buttons Bar */
+        .category-bar {
+            display: flex;
+            gap: 8px;
+            margin: 12px 0;
+            flex-wrap: wrap;
+        }
+
         /* Chatbot Styles */
         .chatbot-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 300px;
-            max-height: 400px;
+            width: 320px;
+            max-height: 440px;
             background-color: #f9f9f9;
             border: 1px solid #ddd;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.16);
             display: flex;
             flex-direction: column;
+            z-index: 100;
+            transition: max-height .3s;
         }
         .chatbot-header {
-            background-color: #007bff;
-            color: white;
-            padding: 10px;
+            background: #007bff;
+            color: #fff;
+            padding: 12px;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.09em;
+            font-weight: 600;
         }
+        .chatbot-header button {
+            background: none;
+            color: #fff;
+            border: none;
+            font-size: 1.35em;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .chatbot-header button:hover { color: #ffeb3b; }
         .chatbot-messages {
             flex-grow: 1;
             padding: 10px;
             overflow-y: auto;
+            font-size: 0.97em;
         }
+        .message { margin: 7px 0; padding: 6px 10px; border-radius: 7px; width: fit-content; max-width: 90%; }
+        .user { background: #e7f1fd; margin-left: auto; }
+        .bot { background: #f1f1f1; color: #222; }
         .chatbot-input {
             display: flex;
             border-top: 1px solid #ddd;
+            background: #fff;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
         }
         .chatbot-input input {
             flex-grow: 1;
@@ -44,12 +96,26 @@
             border-bottom-left-radius: 10px;
         }
         .chatbot-input button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px;
+            border-bottom-left-radius: 0;
             border-bottom-right-radius: 10px;
-            cursor: pointer;
+        }
+        .chatbot-quick-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin: 8px 0 0 0;
+        }
+        .chatbot-quick-btn {
+            background: #e3f0ff;
+            color: #007bff;
+            border: 1px solid #007bff;
+            border-radius: 7px;
+            padding: 6px 12px;
+            font-size: 0.92em;
+        }
+        .chatbot-quick-btn:hover {
+            background: #007bff;
+            color: #fff;
         }
     </style>
 </head>
@@ -57,14 +123,14 @@
     <!-- Header Section -->
     <header>
         <h1 id="promarket-title">ProMarket</h1>
-        <label for="category">Filter by Category:</label>
-        <select id="category">
-            <option value="all">All</option>
-            <option value="electronics">Electronics</option>
-            <option value="fashion">Fashion</option>
-            <option value="books">Books</option>
-            <option value="drawing-tools">Drawing Tools</option>
-        </select>
+        <!-- Category Buttons -->
+        <div class="category-bar" id="categoryBar">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="electronics">Electronics</button>
+            <button class="category-btn" data-category="fashion">Fashion</button>
+            <button class="category-btn" data-category="books">Books</button>
+            <button class="category-btn" data-category="drawing-tools">Drawing Tools</button>
+        </div>
         <hr>
         <nav>
             <ul>
@@ -77,7 +143,7 @@
         <!-- Search Bar -->
         <form class="search-bar" id="searchForm">
             <input type="text" id="searchInput" placeholder="Search products..." />
-            <button type="submit">Search</button>
+            <button type="submit" class="button">Search</button>
         </form>
     </header>
 
@@ -87,10 +153,10 @@
             <div class="animated-element">
                 <h1 class="bold-text">Welcome To ProMarket!</h1>
             </div>
-            <button class="animated-element button" id="signUpBtn">Sign Up</button>
+            <button class="button" id="signUpBtn">Sign Up</button>
             <p>Your trusted online marketplace for buying and selling.</p>
             <p>We all know that shopping can be a hassle, both online and offline. So, we created ProMarket, a place where you can buy the things that you want safely.</p>
-            <a href="products.html" class="btn">Browse Products</a>
+            <a href="products.html" class="button">Browse Products</a>
         </section>
 
         <section class="products">
@@ -98,27 +164,27 @@
             <div class="product" data-category="electronics" data-name="Google Pixel 9A" data-price="500.00">
                 <h2>Google Pixel 9A</h2>
                 <p>Price: $500.00</p>
-                <button class="add-to-cart button">Add to Cart</button>
+                <button class="button add-to-cart">Add to Cart</button>
             </div>
             <div class="product" data-category="fashion" data-name="Tommy Hilfiger Jacket" data-price="100.00">
                 <h2>Tommy Hilfiger Jacket</h2>
                 <p>Price: $100.00</p>
-                <button class="add-to-cart button">Add to Cart</button>
+                <button class="button add-to-cart">Add to Cart</button>
             </div>
             <div class="product" data-category="fashion" data-name="Glasses" data-price="10.99">
                 <h2>Glasses</h2>
                 <p>Price: $10.99</p>
-                <button class="add-to-cart button">Add to Cart</button>
+                <button class="button add-to-cart">Add to Cart</button>
             </div>
             <div class="product" data-category="drawing-tools" data-name="Markers" data-price="50.00">
                 <h2>Markers</h2>
                 <p>Price: $50.00</p>
-                <button class="add-to-cart button">Add to Cart</button>
+                <button class="button add-to-cart">Add to Cart</button>
             </div>
             <div class="product" data-category="fashion" data-name="Nike Shoes" data-price="200.00">
                 <h2>Nike Shoes</h2>
                 <p>Price: $200.00</p>
-                <button class="add-to-cart button">Add to Cart</button>
+                <button class="button add-to-cart">Add to Cart</button>
             </div>
         </section>
 
@@ -137,10 +203,11 @@
             <button onclick="toggleChatbot()" id="toggleButton">-</button>
         </div>
         <div class="chatbot-messages" id="chatMessages"></div>
+        <div class="chatbot-quick-btns" id="chatQuickBtns"></div>
         <div class="chatbot-typing" id="chatTyping" style="display: none;">Chatbot is typing...</div>
         <div class="chatbot-input">
             <input type="text" id="chatInput" placeholder="Type your message..." />
-            <button id="chatSendBtn">Send</button>
+            <button id="chatSendBtn" class="button">Send</button>
         </div>
     </div>
 
@@ -151,11 +218,18 @@
 
     <!-- JavaScript -->
     <script>
-        // --------- Product Filtering ---------
-        document.getElementById('category').addEventListener('change', filterByCategory);
+        // --------- Category Filtering (Buttons) ---------
+        const categoryBar = document.getElementById('categoryBar');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        categoryBar.addEventListener('click', (e) => {
+            if (e.target.classList.contains('category-btn')) {
+                categoryBtns.forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                filterByCategory(e.target.getAttribute('data-category'));
+            }
+        });
 
-        function filterByCategory() {
-            const selectedCategory = document.getElementById('category').value;
+        function filterByCategory(selectedCategory) {
             const products = document.querySelectorAll('.product');
             products.forEach(product => {
                 const productCategory = product.getAttribute('data-category');
@@ -172,11 +246,7 @@
             const products = document.querySelectorAll('.product');
             products.forEach(product => {
                 const name = product.getAttribute('data-name').toLowerCase();
-                if (name.includes(query)) {
-                    product.style.display = 'block';
-                } else {
-                    product.style.display = 'none';
-                }
+                product.style.display = name.includes(query) ? 'block' : 'none';
             });
         }
 
@@ -224,7 +294,6 @@
             }
         }
 
-        // Add event listeners after DOM loads
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.add-to-cart').forEach(button => {
                 button.addEventListener('click', addToCart);
@@ -241,20 +310,93 @@
         const chatTypingDiv = document.getElementById('chatTyping');
         const chatInput = document.getElementById('chatInput');
         const chatSendBtn = document.getElementById('chatSendBtn');
+        const chatQuickBtnsDiv = document.getElementById('chatQuickBtns');
+
+        // Quick action buttons for chatbot
+        const quickActions = [
+            { label: "Show Electronics", action: "show electronics" },
+            { label: "Show Fashion", action: "show fashion" },
+            { label: "View Cart", action: "view cart" },
+            { label: "Help", action: "help" }
+        ];
+
+        function renderQuickButtons() {
+            chatQuickBtnsDiv.innerHTML = '';
+            quickActions.forEach(({ label, action }) => {
+                const btn = document.createElement('button');
+                btn.className = 'chatbot-quick-btn';
+                btn.textContent = label;
+                btn.onclick = () => handleQuickAction(action);
+                chatQuickBtnsDiv.appendChild(btn);
+            });
+        }
+
+        function handleQuickAction(action) {
+            chatInput.value = action;
+            sendMessage();
+        }
+
+        // Improved responses
+        function getResponse(message) {
+            message = message.toLowerCase();
+            if (["hello", "hi", "hey"].includes(message)) {
+                return "Hi! How can I assist you today? You can ask for help, browse categories, or view your cart.";
+            }
+            if (["help", "what can you do"].some(q => message.includes(q))) {
+                return "I can help you search for products, filter by category, add items to your cart, show your cart, or answer questions about ProMarket!";
+            }
+            if (message.includes("electronics")) {
+                simulateCategoryClick('electronics');
+                return "Here are the electronics products!";
+            }
+            if (message.includes("fashion")) {
+                simulateCategoryClick('fashion');
+                return "Showing you the latest in fashion!";
+            }
+            if (message.includes("drawing tools")) {
+                simulateCategoryClick('drawing-tools');
+                return "Here are the drawing tools!";
+            }
+            if (message.includes("books")) {
+                simulateCategoryClick('books');
+                return "Currently, there are no books listed. Check back soon!";
+            }
+            if (message.includes("cart") || message.includes("view cart")) {
+                if (cart.length === 0) return "Your cart is empty.";
+                let reply = "Your cart items:<br>";
+                cart.forEach(item => reply += `• ${item.name} - $${item.price.toFixed(2)}<br>`);
+                const total = cart.reduce((sum, item) => sum + item.price, 0);
+                reply += `<b>Total:</b> $${total.toFixed(2)}`;
+                return reply;
+            }
+            if (message.includes("add") && message.includes("cart")) {
+                return "To add a product, just click the 'Add to Cart' button for that item.";
+            }
+            if (message.includes("bye")) {
+                return "Goodbye! Have a great day!";
+            }
+            if (message.includes("what is promarket")) {
+                return "ProMarket is a safe and reliable online marketplace where you can buy and sell with confidence.";
+            }
+            return "I'm not sure how to respond to that. Try using the quick action buttons, or ask me about products, categories, or your cart!";
+        }
 
         window.onload = () => {
-            chatHistory.forEach(({ sender, message }) => addMessage(sender, message));
+            chatHistory.forEach(({ sender, message }) => addMessage(sender, message, true));
+            renderQuickButtons();
         };
 
         window.toggleChatbot = function() {
             const chatbot = document.getElementById('chatbot');
             const toggleButton = document.getElementById('toggleButton');
             if (chatbot.style.maxHeight === '40px') {
-                chatbot.style.maxHeight = '400px';
+                chatbot.style.maxHeight = '440px';
                 toggleButton.textContent = '-';
+                renderQuickButtons();
             } else {
                 chatbot.style.maxHeight = '40px';
                 toggleButton.textContent = '+';
+                chatQuickBtnsDiv.innerHTML = '';
             }
         };
 
@@ -265,31 +407,22 @@
             chatInput.value = '';
             chatTypingDiv.style.display = 'block';
             setTimeout(() => {
-                const botResponse = getResponse(userMessage.toLowerCase());
+                const botResponse = getResponse(userMessage);
                 addMessage('Bot', botResponse);
                 chatTypingDiv.style.display = 'none';
-            }, 1000);
+            }, 700);
         }
 
-        function addMessage(sender, message) {
+        function addMessage(sender, message, skipSave) {
             const messageDiv = document.createElement('div');
             messageDiv.classList.add('message', sender === 'You' ? 'user' : 'bot');
-            messageDiv.textContent = `${sender}: ${message}`;
+            messageDiv.innerHTML = `<span>${sender}:</span> ${message}`;
             messagesDiv.appendChild(messageDiv);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            chatHistory.push({ sender, message });
-            localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
-        }
-
-        function getResponse(message) {
-            const responses = {
-                "hello": "Hi! How can I assist you today?",
-                "help": "I can help you search for products, add items to your cart, or answer any questions about ProMarket.",
-                "bye": "Goodbye! Have a great day!",
-                "what is promarket?": ProMarket is a safe and reliable online marketplace which you can trust.
-                "default": "I'm not sure how to respond to that. Can you rephrase?"
-            };
-            return responses[message] || responses['default'];
+            if (!skipSave) {
+                chatHistory.push({ sender, message });
+                localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+            }
         }
 
         chatSendBtn.addEventListener('click', sendMessage);
@@ -297,6 +430,13 @@
             if (e.key === 'Enter') sendMessage();
         });
 
+        // Simulated category click for chatbot
+        function simulateCategoryClick(category) {
+            categoryBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-category') === category);
+            });
+            filterByCategory(category);
+        }
     </script>
 </body>
 </html>
