@@ -6,7 +6,29 @@
     <title>ProMarket - Home</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* ...[styles unchanged]... */
+        /* Inline responsiveness for critical elements - fallback if CSS doesn't load */
+        .products-listing {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .product {
+            flex: 1 1 220px;
+            min-width: 220px;
+            max-width: 300px;
+            margin: 10px auto;
+        }
+        @media (max-width: 900px) {
+            .products-listing {
+                flex-direction: column;
+                align-items: center;
+            }
+            .product {
+                width: 90%;
+                min-width: unset;
+                max-width: unset;
+            }
+        }
     </style>
 </head>
 <body>
@@ -14,7 +36,7 @@
     <header>
         <h1 id="promarket-title">ProMarket</h1>
         <!-- Category Buttons -->
-        <div class="category-bar" id="categoryBar">
+        <div class="category-bar" id="categoryBar" role="navigation" aria-label="Product categories">
             <button class="category-btn active" data-category="all">All</button>
             <button class="category-btn" data-category="electronics">Electronics</button>
             <button class="category-btn" data-category="fashion">Fashion</button>
@@ -23,7 +45,7 @@
         </div>
         <hr>
         <nav>
-            <ul>
+            <ul class="nav-list">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="products.html">Products</a></li>
                 <li><a href="about.html">About</a></li>
@@ -111,4 +133,6 @@
     <!-- JavaScript -->
     <script src="script.js"></script>
 </body>
-</html>
+</html>        
+         
+       
