@@ -1,430 +1,233 @@
-/* Responsive Reset & Base */
-html, body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #fafbfc;
-    min-height: 100%;
-}
+// --------- Category Filtering (Buttons) ---------
+document.addEventListener('DOMContentLoaded', () => {
+    const categoryBar = document.getElementById('categoryBar');
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const products = document.querySelectorAll('.product');
 
-header, main, footer {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+    categoryBar.addEventListener('click', (e) => {
+        if (e.target.classList.contains('category-btn')) {
+            categoryBtns.forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+            filterByCategory(e.target.getAttribute('data-category'));
+        }
+    });
 
-header {
-    background: #fff;
-    border-bottom: 1px solid #e4e4e4;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-}
-
-#promarket-title {
-    background-color: #90EE90;
-    color: #333;
-    font-size: 3em;
-    font-weight: bold;
-    text-align: center;
-    padding: 20px;
-    border: 2px solid #70C570;
-    border-radius: 10px;
-    width: fit-content;
-    margin: 10px auto;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-}
-
-.category-bar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin: 10px 0 15px 0;
-}
-.category-btn {
-    background: #eee;
-    border: none;
-    padding: 10px 16px;
-    margin: 2px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background 0.2s, color 0.2s;
-}
-.category-btn.active, .category-btn:hover {
-    background: #007BFF;
-    color: #fff;
-}
-
-nav {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-}
-.nav-list {
-    display: flex;
-    list-style: none;
-    gap: 18px;
-    padding: 0;
-    margin: 0;
-    flex-wrap: wrap;
-}
-.nav-list li {
-    margin: 0;
-}
-.nav-list a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    padding: 6px 10px;
-    border-radius: 3px;
-    transition: background 0.2s, color 0.2s;
-}
-.nav-list a:hover {
-    background: #007BFF;
-    color: #fff;
-}
-
-.search-bar {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin: 10px auto 0 auto;
-    max-width: 500px;
-}
-.search-bar input[type="text"] {
-    flex: 1 1 200px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1em;
-}
-
-main {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 0 16px 30px 16px;
-}
-
-.welcome {
-    flex: 1 1 330px;
-    background: #eafbe7;
-    margin: 10px 0;
-    padding: 24px 14px 18px 14px;
-    border-radius: 8px;
-    box-shadow: 1px 1px 6px #d8f5d2;
-    text-align: center;
-    min-width: 260px;
-    max-width: 450px;
-}
-.bold-text {
-    font-size: 2em;
-    font-weight: bold;
-}
-.animated-element {
-    animation: fadeInMoveUp 2s ease-out;
-}
-
-.products {
-    flex: 2 1 480px;
-    margin: 10px 0;
-    padding: 18px 8px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 1px 1px 6px #e4e4e4;
-}
-.products-listing {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    justify-content: center;
-}
-.product {
-    flex: 1 1 220px;
-    min-width: 220px;
-    max-width: 300px;
-    background: #f3fbff;
-    border-radius: 7px;
-    box-shadow: 1px 1px 6px #d2e7f5;
-    padding: 16px;
-    margin: 8px 0;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.product h2 {
-    font-size: 1.1em;
-    margin-bottom: 8px;
-}
-
-.cart {
-    flex: 1 1 280px;
-    margin: 10px 0;
-    background: #fffbea;
-    padding: 18px 12px;
-    border-radius: 8px;
-    box-shadow: 1px 1px 6px #f9eec7;
-    min-width: 220px;
-    max-width: 350px;
-}
-#cart-items {
-    min-height: 40px;
-    margin-bottom: 8px;
-}
-#cart-total {
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-#checkout {
-    width: 100%;
-    margin-top: 5px;
-}
-
-.button {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 6px 0;
-    transition: background 0.2s;
-}
-.button:hover, .button:focus {
-    background-color: #0056b3;
-    outline: none;
-}
-
-/* Chatbot Styles */
-.chatbot-container {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 330px;
-    max-width: 95vw;
-    max-height: 440px;
-    background: #fff;
-    border-radius: 14px 14px 8px 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.18);
-    transition: max-height 0.3s;
-    overflow: hidden;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-}
-.chatbot-header {
-    background: #007BFF;
-    color: #fff;
-    padding: 10px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-#toggleButton {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 1.2em;
-    cursor: pointer;
-}
-.chatbot-messages {
-    flex: 1 1 auto;
-    overflow-y: auto;
-    padding: 10px 14px;
-    background: #f4f8ff;
-}
-.message {
-    margin: 6px 0;
-    padding: 6px 10px;
-    border-radius: 6px;
-    max-width: 95%;
-    word-break: break-word;
-}
-.user {
-    background: #e3f4ff;
-    align-self: flex-end;
-    text-align: right;
-}
-.bot {
-    background: #e4fbe9;
-    align-self: flex-start;
-    text-align: left;
-}
-.chatbot-input {
-    display: flex;
-    gap: 5px;
-    padding: 8px 10px 8px 10px;
-    background: #f7f7f7;
-    border-top: 1px solid #eee;
-}
-.chatbot-input input[type="text"] {
-    flex: 1 1 auto;
-    padding: 7px 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1em;
-}
-.chatbot-quick-btns {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 5px 10px;
-    background: #f4f8ff;
-    border-top: 1px solid #e4e4e4;
-}
-.chatbot-quick-btn {
-    background: #eee;
-    border: none;
-    border-radius: 5px;
-    padding: 7px 14px;
-    cursor: pointer;
-    font-size: 0.95em;
-    margin: 2px 0;
-    transition: background 0.2s, color 0.2s;
-}
-.chatbot-quick-btn:hover, .chatbot-quick-btn:focus {
-    background: #007BFF;
-    color: #fff;
-    outline: none;
-}
-.chatbot-typing {
-    padding: 7px 14px;
-    font-style: italic;
-    color: #777;
-    background: #f7f7f7;
-}
-
-/* Footer */
-footer {
-    margin-top: 30px;
-    padding: 16px;
-    text-align: center;
-    background: #eafbe7;
-    color: #444;
-    border-top: 1px solid #e4e4e4;
-    width: 100%;
-    font-size: 1em;
-}
-
-/* Keyframes for animations */
-@keyframes fadeInMoveUp {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
+    function filterByCategory(selectedCategory) {
+        products.forEach(product => {
+            const productCategory = product.getAttribute('data-category');
+            product.style.display = (selectedCategory === 'all' || productCategory === selectedCategory) ? 'block' : 'none';
+        });
     }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-/* RESPONSIVE DESIGN */
+    // --------- Product Search -----------
+    document.getElementById('searchForm').addEventListener('submit', searchProducts);
 
-/* For tablets and below */
-@media (max-width: 1024px) {
-    main {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 14px;
+    function searchProducts(event) {
+        event.preventDefault();
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        products.forEach(product => {
+            const name = product.getAttribute('data-name').toLowerCase();
+            product.style.display = name.includes(query) ? 'block' : 'none';
+        });
     }
-    .products, .welcome, .cart {
-        max-width: 98vw;
-        margin: 0 auto 12px auto;
-    }
-    .products-listing {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-}
 
-/* For mobile devices */
-@media (max-width: 768px) {
-    #promarket-title {
-        font-size: 2em;
-        padding: 12px;
-    }
-    header, main, footer {
-        max-width: 100vw;
-        padding: 0 4px;
-    }
-    .category-bar {
-        gap: 6px;
-        flex-wrap: wrap;
-    }
-    .nav-list {
-        flex-direction: column;
-        gap: 8px;
-        align-items: center;
-    }
-    .products-listing {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-    .product {
-        min-width: 80vw;
-        max-width: 98vw;
-        width: 97vw;
-        margin: 0 auto;
-        padding: 12px 6px;
-    }
-    .products, .welcome, .cart {
-        max-width: 100vw;
-        padding: 9px 4px;
-    }
-    .cart {
-        margin: 0 auto 18px auto;
-    }
-    .chatbot-container {
-        right: 4vw;
-        bottom: 6vw;
-        width: 97vw;
-        max-width: 97vw;
-        min-width: 0;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.17);
-    }
-}
+    // --------- Cart Logic -----------
+    let cart = [];
 
-@media (max-width: 520px) {
-    .product, .welcome, .products, .cart {
-        min-width: unset;
-        max-width: 99vw;
-        width: 99vw;
-        padding: 8px 2vw;
+    function addToCart(event) {
+        const productElement = event.target.closest('.product');
+        const productName = productElement.getAttribute('data-name');
+        const productPrice = parseFloat(productElement.getAttribute('data-price'));
+        cart.push({ name: productName, price: productPrice });
+        updateCart();
     }
-    .chatbot-container {
-        left: 2vw;
-        right: 2vw;
-        bottom: 3vw;
-        width: 96vw;
-        max-width: 96vw;
-    }
-    .category-bar {
-        flex-direction: column;
-        gap: 3px;
-    }
-    .search-bar {
-        flex-direction: column;
-        gap: 5px;
-    }
-}
 
-/* Hide chatbot for printing */
-@media print {
-    .chatbot-container {
-        display: none !important;
+    function updateCart() {
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartTotalElement = document.getElementById('cart-total');
+        cartItemsContainer.innerHTML = '';
+        let total = 0;
+        cart.forEach(item => {
+            const itemElement = document.createElement('div');
+            itemElement.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+            cartItemsContainer.appendChild(itemElement);
+            total += item.price;
+        });
+        cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
     }
-}
 
-/* Accessibility: Focus visible */
-.category-btn:focus, .button:focus, .chatbot-quick-btn:focus {
-    outline: 2px solid #0056b3;
-    outline-offset: 2px;
-}  
+    function checkout() {
+        if (cart.length === 0) {
+            alert('Your cart is empty. Please add items to the cart before checking out.');
+            return;
+        }
+        let cartSummary = 'You have the following items in your cart:\n\n';
+        cart.forEach((item, index) => {
+            cartSummary += `${index + 1}. ${item.name} - $${item.price.toFixed(2)}\n`;
+        });
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        cartSummary += `\nTotal: $${total.toFixed(2)}\n\n`;
+        const confirmCheckout = confirm(cartSummary + 'Proceed to checkout?');
+        if (confirmCheckout) {
+            alert('Thank you for your purchase! Your order is being processed.');
+            cart = [];
+            updateCart();
+        }
+    }
+
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', addToCart);
+    });
+    document.getElementById('checkout').addEventListener('click', checkout);
+    document.getElementById('signUpBtn').addEventListener('click', () => {
+        alert('Sign-up functionality is coming soon!');
+    });
+
+    // --------- Chatbot Logic -----------
+    let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+    const messagesDiv = document.getElementById('chatMessages');
+    const chatTypingDiv = document.getElementById('chatTyping');
+    const chatInput = document.getElementById('chatInput');
+    const chatSendBtn = document.getElementById('chatSendBtn');
+    const chatQuickBtnsDiv = document.getElementById('chatQuickBtns');
+
+    // Quick action buttons for chatbot
+    const quickActions = [
+        { label: "Show Electronics", action: "show electronics" },
+        { label: "Show Fashion", action: "show fashion" },
+        { label: "View Cart", action: "view cart" },
+        { label: "Help", action: "help" }
+    ];
+
+    function renderQuickButtons() {
+        chatQuickBtnsDiv.innerHTML = '';
+        quickActions.forEach(({ label, action }) => {
+            const btn = document.createElement('button');
+            btn.className = 'chatbot-quick-btn';
+            btn.textContent = label;
+            btn.onclick = () => handleQuickAction(action);
+            chatQuickBtnsDiv.appendChild(btn);
+        });
+    }
+
+    function handleQuickAction(action) {
+        chatInput.value = action;
+        sendMessage();
+    }
+
+    function getResponse(message) {
+        message = message.toLowerCase();
+        if (["hello", "hi", "hey"].includes(message)) {
+            return "Hi! How can I assist you today? You can ask for help, browse categories, or view your cart.";
+        }
+        if (["help", "what can you do"].some(q => message.includes(q))) {
+            return "I can help you search for products, filter by category, add items to your cart, show your cart, or answer questions about ProMarket!";
+        }
+        if (message.includes("electronics")) {
+            simulateCategoryClick('electronics');
+            return "Here are the electronics products!";
+        }
+        if (message.includes("fashion")) {
+            simulateCategoryClick('fashion');
+            return "Showing you the latest in fashion!";
+        }
+        if (message.includes("drawing tools")) {
+            simulateCategoryClick('drawing-tools');
+            return "Here are the drawing tools!";
+        }
+        if (message.includes("books")) {
+            simulateCategoryClick('books');
+            return "Currently, there are no books listed. Check back soon!";
+        }
+        if (message.includes("cart") || message.includes("view cart")) {
+            if (cart.length === 0) return "Your cart is empty.";
+            let reply = "Your cart items:<br>";
+            cart.forEach(item => reply += `• ${item.name} - $${item.price.toFixed(2)}<br>`);
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            reply += `<b>Total:</b> $${total.toFixed(2)}`;
+            return reply;
+        }
+        if (message.includes("add") && message.includes("cart")) {
+            return "To add a product, just click the 'Add to Cart' button for that item.";
+        }
+        if (message.includes("bye")) {
+            return "Goodbye! Have a great day!";
+        }
+        if (message.includes("what is promarket")) {
+            return "ProMarket is a safe and reliable online marketplace where you can buy and sell with confidence.";
+        }
+        return "I'm not sure how to respond to that. Try using the quick action buttons, or ask me about products, categories, or your cart!";
+    }
+
+    // Populate chat history and quick buttons on load
+    chatHistory.forEach(({ sender, message }) => addMessage(sender, message, true));
+    renderQuickButtons();
+
+    window.toggleChatbot = function() {
+        const chatbot = document.getElementById('chatbot');
+        const toggleButton = document.getElementById('toggleButton');
+        if (chatbot.style.maxHeight === '40px') {
+            chatbot.style.maxHeight = '440px';
+            toggleButton.textContent = '-';
+            renderQuickButtons();
+        } else {
+            chatbot.style.maxHeight = '40px';
+            toggleButton.textContent = '+';
+            chatQuickBtnsDiv.innerHTML = '';
+        }
+    };
+
+    function sendMessage() {
+        const userMessage = chatInput.value.trim();
+        if (!userMessage) return;
+        addMessage('You', userMessage);
+        chatInput.value = '';
+        chatTypingDiv.style.display = 'block';
+        setTimeout(() => {
+            const botResponse = getResponse(userMessage);
+            addMessage('Bot', botResponse);
+            chatTypingDiv.style.display = 'none';
+        }, 700);
+    }
+
+    function addMessage(sender, message, skipSave) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', sender === 'You' ? 'user' : 'bot');
+        messageDiv.innerHTML = `<span>${sender}:</span> ${message}`;
+        messagesDiv.appendChild(messageDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        if (!skipSave) {
+            chatHistory.push({ sender, message });
+            localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+        }
+    }
+
+    chatSendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keyup', function(e) {
+        if (e.key === 'Enter') sendMessage();
+    });
+
+    // Simulated category click for chatbot
+    function simulateCategoryClick(category) {
+        categoryBtns.forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-category') === category);
+        });
+        filterByCategory(category);
+    }
+
+    // -- Responsive tweaks for chatbot on orientationchange/resize --
+    function adjustChatbotHeight() {
+        const chatbot = document.getElementById('chatbot');
+        if (window.innerWidth < 540) {
+            chatbot.style.maxHeight = (window.innerHeight * 0.7) + 'px';
+        } else {
+            chatbot.style.maxHeight = '440px';
+        }
+    }
+    window.addEventListener('resize', adjustChatbotHeight);
+    window.addEventListener('orientationchange', adjustChatbotHeight);
+    adjustChatbotHeight();
+});
+
+
+    
