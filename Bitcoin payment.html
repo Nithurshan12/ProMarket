@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bitcoin Payment</title>
+  <style>
+    body { font-family: Times New Roman; text-align: center; margin-top: 50px; }
+    .btc-address { font-size: 1.2em; margin-bottom: 10px; }
+    .qr-code { margin: 20px auto; }
+    .instructions { margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <h2>Pay with Bitcoin</h2>
+  <div class="btc-address">
+    Send payment to:<br>
+    <strong>1BoatSLRHtKNngkdXEeobR76b53LETtpyT</strong>
+  </div>
+  <div class="qr-code">
+    <img 
+      src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:1BoatSLRHtKNngkdXEeobR76b53LETtpyT?amount=0.01"
+      alt="Bitcoin Payment QR Code"
+    />
+  </div>
+  <div class="instructions">
+    <p>Scan the QR code with your Bitcoin wallet or copy the address above to send your payment.</p>
+    <p>Amount: <strong>0.01 BTC</strong></p>
+  </div>
+</body>
+</html>
