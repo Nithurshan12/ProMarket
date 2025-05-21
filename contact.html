@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us | ProMarket</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.12);
+      border-radius: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      overflow: hidden;
+    }
+    .contact-info, .contact-form {
+      flex: 1 1 350px;
+      padding: 40px 30px;
+    }
+    .contact-info {
+      background: #08415c;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .contact-info h2 {
+      margin-bottom: 20px;
+      font-size: 2.2rem;
+    }
+    .contact-info p {
+      margin: 10px 0;
+    }
+    .contact-info .info-item {
+      margin: 15px 0;
+      display: flex;
+      align-items: center;
+    }
+    .contact-info .info-item i {
+      margin-right: 10px;
+      font-size: 1.2em;
+    }
+    .contact-form h2 {
+      color: #08415c;
+      margin-bottom: 20px;
+    }
+    .contact-form form {
+      display: flex;
+      flex-direction: column;
+    }
+    .contact-form input, .contact-form textarea {
+      margin-bottom: 20px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
+      transition: border 0.2s;
+      resize: none;
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      border: 1.5px solid #08415c;
+      outline: none;
+    }
+    .contact-form button {
+      background: #08415c;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 6px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .contact-form button:hover {
+      background: #0c6291;
+    }
+    .map-container {
+      width: 100%;
+      height: 250px;
+      border: none;
+      margin-top: 16px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    @media (max-width: 800px) {
+      .container {
+        flex-direction: column;
+        margin: 20px;
+      }
+      .contact-info, .contact-form {
+        padding: 24px 12px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="contact-info">
+      <h2>Contact Information</h2>
+      <div class="info-item"><i class="fas fa-envelope"></i> Email: <a href="mailto:support@promarket.com" style="color:#fff;text-decoration:underline;margin-left:5px;">support@promarket.com</a></div>
+      <div class="info-item"><i class="fas fa-phone"></i> Phone: <a href="tel:+1234567890" style="color:#fff;text-decoration:underline;margin-left:5px;">+1 234 567 890</a></div>
+      <div class="info-item"><i class="fas fa-map-marker-alt"></i> Address: 123 Market Avenue, City, Country</div>
+      <p>Follow us:</p>
+      <div>
+        <a href="#" style="color:#fff;margin-right:10px;"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" style="color:#fff;margin-right:10px;"><i class="fab fa-twitter"></i></a>
+        <a href="#" style="color:#fff;margin-right:10px;"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <iframe class="map-container"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.8354345094864!2d-122.42067958468312!3d37.774929779759664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808c77c7b3f7%3A0x8e5e9d8b3e7a9c8a!2sMarket%20St%2C%20San%20Francisco%2C%20CA%2094103!5e0!3m2!1sen!2sus!4v1684030773156!5m2!1sen!2sus"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="contact-form">
+      <h2>Get in Touch</h2>
+      <form id="contactForm" autocomplete="off" novalidate>
+        <input type="text" id="name" name="name" placeholder="Your Name*" required>
+        <input type="email" id="email" name="email" placeholder="Your Email*" required>
+        <input type="text" id="subject" name="subject" placeholder="Subject*" required>
+        <textarea id="message" name="message" rows="5" placeholder="Your Message*" required></textarea>
+        <button type="submit">Send Message</button>
+        <div id="formMsg" style="margin-top:10px;"></div>
+      </form>
+    </div>
+  </div>
+  <script>
+    // Simple client-side validation and feedback
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+      let fields = ['name', 'email', 'subject', 'message'];
+      fields.forEach(function(field) {
+        let el = document.getElementById(field);
+        if (!el.value.trim()) {
+          el.style.borderColor = 'red';
+          valid = false;
+        } else {
+          el.style.borderColor = '#ccc';
+        }
+      });
+      const email = document.getElementById('email').value.trim();
+      const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+      if (!emailRegex.test(email)) {
+        document.getElementById('email').style.borderColor = 'red';
+        valid = false;
+      }
+      if (!valid) {
+        document.getElementById('formMsg').innerHTML = '<span style="color:red;">Please fill out all fields correctly.</span>';
+        return;
+      }
+      // Simulate successful submission (replace with AJAX/fetch for real backend integration)
+      document.getElementById('formMsg').innerHTML = '<span style="color:green;">Thank you! Your message has been sent.</span>';
+      document.getElementById('contactForm').reset();
+    });
+  </script>
+</body>
+</html>
