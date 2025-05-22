@@ -2,156 +2,111 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProMarket - Products</title>
-    <!-- Link to your CSS file (update if located elsewhere) -->
-    <link rel="stylesheet" href="styles.css">
+    <title>Products</title>
     <style>
-        /* Example color scheme based on common modern palettes */
         body {
-            background-color: #181a20;
-            color: #f0f0f0;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            background: none;
             margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
         }
-        header, footer {
-            background: #20232a;
-            color: #61dafb;
-            padding: 1rem 2rem;
-            text-align: center;
+        h1, h2, h3 {
+            color: #90ee90; /* Light green */
         }
-        h1 {
-            margin-top: 1rem;
-            color: #61dafb;
-        }
-        .search-bar {
+        .product-list {
             display: flex;
-            justify-content: center;
-            margin: 2rem 0 1rem 0;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px;
         }
-        .search-bar input {
-            padding: 0.5rem;
-            font-size: 1rem;
-            border-radius: 4px 0 0 4px;
-            border: 1px solid #333;
-            width: 250px;
+        .product {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 12px;
+            width: 200px;
+            box-shadow: 2px 2px 8px #eee;
+            background: rgba(255,255,255,0.8);
         }
-        .search-bar button {
-            padding: 0.5rem 1rem;
+        button {
+            background-color: #90ee90;
             border: none;
-            background: #61dafb;
-            color: #20232a;
-            font-weight: bold;
-            border-radius: 0 4px 4px 0;
-            cursor: pointer;
-        }
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: auto;
-        }
-        .product-card {
-            background: #24272e;
+            padding: 8px 14px;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            padding: 1rem;
-            transition: transform 0.2s;
-        }
-        .product-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-        }
-        .product-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-        .product-title {
-            margin: 1rem 0 0.5rem 0;
-            font-size: 1.2rem;
-            color: #61dafb;
-        }
-        .product-desc {
-            font-size: 1rem;
-            color: #ccc;
-        }
-        .product-price {
-            margin-top: 0.5rem;
+            cursor: pointer;
+            color: #222;
             font-weight: bold;
-            color: #ffb74d;
         }
-        @media (max-width: 600px) {
-            .products-grid {
-                grid-template-columns: 1fr;
-                padding: 1rem;
-            }
+        #cart {
+            margin: 30px;
+            border: 1px solid #90ee90;
+            border-radius: 8px;
+            padding: 20px;
+            background: rgba(240,255,240, 0.5);
+        }
+        #cart-list {
+            margin-bottom: 16px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>ProMarket</h1>
-        <nav>
-            <a href="index.html" style="color:#61dafb; margin-right:20px;">Home</a>
-            <a href="products.html" style="color:#61dafb; margin-right:20px;">Products</a>
-            <a href="contact.html" style="color:#61dafb;">Contact</a>
-        </nav>
-    </header>
-    <main>
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search products...">
-            <button onclick="searchProducts()">Search</button>
+    <h1>Our Products</h1>
+    <div class="product-list">
+        <div class="product" data-name="Product A" data-price="20">
+            <h2>Product A</h2>
+            <p>Price: $20</p>
+            <button onclick="addToCart('Product A', 20)">Add to Cart</button>
         </div>
-        <div class="products-grid" id="productsGrid">
-            <!-- Example product card -->
-            <div class="product-card">
-                <img src="https://via.placeholder.com/300x180?text=Product+1" alt="Product 1" class="product-image">
-                <div class="product-desc">Paint Set</div>
-                <div class="product-price">$19.99</div>
-            </div>
-            <div class="product-card">
-                <img src="https://via.placeholder.com/300x180?text=Product+2" alt="Product 2" class="product-image">
-                <div class="product-title"></div>
-                <div class="product-desc">Microphone</div>
-                <div class="product-price">$29.99</div>
-            <div>
-              <div class="product-card">
-                <img src="https://via.placeholder.com/300x180?text=Product+1" alt="Product 1" class="product-image">
-                <div class="product-desc">Nike Shoes</div>
-                <div class="product-price">$200.00</div>
-            </div>
-            <div class="product-card">
-                <img src="https://via.placeholder.com/300x180?text=Product+2" alt="Product 2" class="product-image">
-                <div class="product-title"></div>
-                <div class="product-desc">Iphone 16 Pro Max</div>
-                <div class="product-price">$900.99</div>
-            <div>
-            <!-- Add more product cards as needed -->
+        <div class="product" data-name="Product B" data-price="35">
+            <h2>Product B</h2>
+            <p>Price: $35</p>
+            <button onclick="addToCart('Product B', 35)">Add to Cart</button>
         </div>
-    </main>
-    <footer>
-        &copy; 2025 ProMarket. All rights reserved.
-    </footer>
+        <div class="product" data-name="Product C" data-price="15">
+            <h2>Product C</h2>
+            <p>Price: $15</p>
+            <button onclick="addToCart('Product C', 15)">Add to Cart</button>
+        </div>
+        <!-- Add more products as needed -->
+    </div>
+
+    <div id="cart">
+        <h3>Your Cart</h3>
+        <ul id="cart-list"></ul>
+        <p id="total">Total: $0</p>
+        <button onclick="checkout()">Checkout</button>
+    </div>
+
     <script>
-        // Basic product search functionality
-        function searchProducts() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const cards = document.querySelectorAll('.product-card');
-            cards.forEach(card => {
-                const title = card.querySelector('.product-title').textContent.toLowerCase();
-                const desc = card.querySelector('.product-desc').textContent.toLowerCase();
-                if (title.includes(input) || desc.includes(input)) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+        let cart = [];
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            renderCart();
         }
+
+        function renderCart() {
+            const cartList = document.getElementById('cart-list');
+            cartList.innerHTML = '';
+            cart.forEach((item, idx) => {
+                const li = document.createElement('li');
+                li.innerText = `${item.name} - $${item.price}`;
+                cartList.appendChild(li);
+            });
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('total').innerText = `Total: $${total}`;
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            alert('Thank you for your purchase! (Demo only, no actual transaction)');
+            cart = [];
+            renderCart();
+        }
+
+        // Initial render
+        renderCart();
     </script>
 </body>
 </html>
