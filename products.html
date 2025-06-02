@@ -7,10 +7,11 @@
         body {
             background: none;
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
         }
         h1, h2, h3 {
             color: #90ee90; /* Light green */
+            font-family: 'Times New Roman', Times, serif;
         }
         .product-list {
             display: flex;
@@ -25,6 +26,7 @@
             width: 200px;
             box-shadow: 2px 2px 8px #eee;
             background: rgba(255,255,255,0.8);
+            font-family: 'Times New Roman', Times, serif;
         }
         button {
             background-color: #90ee90;
@@ -34,6 +36,7 @@
             cursor: pointer;
             color: #222;
             font-weight: bold;
+            font-family: 'Times New Roman', Times, serif;
         }
         #cart {
             margin: 30px;
@@ -41,6 +44,7 @@
             border-radius: 8px;
             padding: 20px;
             background: rgba(240,255,240, 0.5);
+            font-family: 'Times New Roman', Times, serif;
         }
         #cart-list {
             margin-bottom: 16px;
@@ -50,20 +54,20 @@
 <body>
     <h1>Our Products</h1>
     <div class="product-list">
-        <div class="product" data-name="Product A" data-price="20">
-            <h2>Product A</h2>
-            <p>Price: $20</p>
-            <button onclick="addToCart('Product A', 20)">Add to Cart</button>
+        <div class="product" data-name="Painting Canvas" data-price="25">
+            <h2>Painting Canvas</h2>
+            <p>Price: $25</p>
+            <button onclick="addToCart('Painting Canvas', 25)">Add to Cart</button>
         </div>
-        <div class="product" data-name="Product B" data-price="35">
-            <h2>Product B</h2>
-            <p>Price: $35</p>
-            <button onclick="addToCart('Product B', 35)">Add to Cart</button>
+        <div class="product" data-name="Scissors" data-price="8">
+            <h2>Scissors</h2>
+            <p>Price: $8</p>
+            <button onclick="addToCart('Scissors', 8)">Add to Cart</button>
         </div>
-        <div class="product" data-name="Product C" data-price="15">
-            <h2>Product C</h2>
-            <p>Price: $15</p>
-            <button onclick="addToCart('Product C', 15)">Add to Cart</button>
+        <div class="product" data-name="Chromebook" data-price="230">
+            <h2>Chromebook</h2>
+            <p>Price: $230</p>
+            <button onclick="addToCart('Chromebook', 230)">Add to Cart</button>
         </div>
         <!-- Add more products as needed -->
     </div>
@@ -109,4 +113,4 @@
         renderCart();
     </script>
 </body>
-</html>
+</html>           
