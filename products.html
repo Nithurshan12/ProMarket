@@ -8,9 +8,10 @@
             background: none;
             margin: 0;
             font-family: 'Times New Roman', Times, serif;
+            color: #000; /* Make all text black */
         }
         h1, h2, h3 {
-            color: #90ee90; /* Light green */
+            color: #000; /* Black headings */
             font-family: 'Times New Roman', Times, serif;
         }
         .product-list {
@@ -104,7 +105,7 @@
                 alert('Your cart is empty!');
                 return;
             }
-            alert('Thank you for your purchase! (Demo only, no actual transaction)');
+            alert('Thank you for your purchase!');
             cart = [];
             renderCart();
         }
@@ -113,4 +114,4 @@
         renderCart();
     </script>
 </body>
-</html>           
+</html>
